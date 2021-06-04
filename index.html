@@ -1,28 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Hangman</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="#">
+  <title>Hangman</title>
+</head>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+<body>
+  <br>
+  <div class="spacer input-group mb-3">
+    <input type="text" class="form-control mr-sm-2" placeholder="Insert a word" id="inputWord"">
+      <button class=" btn btn-outline-secondary" type="button" id="submitWord" onclick="startGame()">Start
+    Game</button>
+  </div>
+  <div class="letterInputDiv" id="letterInputDiv">
+    <p id="guessTheWord">Guess the word</p>
+    <button type="button" class="btn btn-light" id="refreshPage" onclick="refreshPage()">Try again!</button>
+  </div>
+  <br>
+  <div class="letters" id="letters">
+    <div>
+      <button type="button" class="btn btn-light alphabet" id="B" onclick="checkLetters('B')">B</button>
+      <button type="button" class="btn btn-light alphabet" id="C" onclick="checkLetters('C')">C</button>
+      <button type="button" class="btn btn-light alphabet" id="D" onclick="checkLetters('D')">D</button>
+      <button type="button" class="btn btn-light alphabet" id="F" onclick="checkLetters('F')">F</button>
+      <button type="button" class="btn btn-light alphabet" id="G" onclick="checkLetters('G')">G</button>
+      <button type="button" class="btn btn-light alphabet" id="H" onclick="checkLetters('H')">H</button>
+      <button type="button" class="btn btn-light alphabet" id="J" onclick="checkLetters('J')">J</button>
+      <button type="button" class="btn btn-light alphabet" id="K" onclick="checkLetters('K')">K</button>
+      <button type="button" class="btn btn-light alphabet" id="L" onclick="checkLetters('L')">L</button>
+      <button type="button" class="btn btn-light alphabet" id="M" onclick="checkLetters('M')">M</button>
+      <button type="button" class="btn btn-light alphabet" id="N" onclick="checkLetters('N')">N</button>
+      <button type="button" class="btn btn-light alphabet" id="P" onclick="checkLetters('P')">P</button>
+      <button type="button" class="btn btn-light alphabet" id="R" onclick="checkLetters('R')">R</button>
+      <button type="button" class="btn btn-light alphabet" id="S" onclick="checkLetters('S')">S</button>
+      <button type="button" class="btn btn-light alphabet" id="T" onclick="checkLetters('T')">T</button>
+      <button type="button" class="btn btn-light alphabet" id="V" onclick="checkLetters('V')">V</button>
+      <button type="button" class="btn btn-light alphabet" id="W" onclick="checkLetters('W')">W</button>
+      <button type="button" class="btn btn-light alphabet" id="X" onclick="checkLetters('X')">X</button>
+      <button type="button" class="btn btn-light alphabet" id="Y" onclick="checkLetters('Y')">Y</button>
+      <button type="button" class="btn btn-light alphabet" id="Z" onclick="checkLetters('Z')">Z</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-light alphabet" id="A" onclick="checkLetters('A')">A</button>
+      <button type="button" class="btn btn-light alphabet" id="E" onclick="checkLetters('E')">E</button>
+      <button type="button" class="btn btn-light alphabet" id="I" onclick="checkLetters('I')">I</button>
+      <button type="button" class="btn btn-light alphabet" id="O" onclick="checkLetters('O')">O</button>
+      <button type="button" class="btn btn-light alphabet" id="U" onclick="checkLetters('U')">U</button>
+    </div>
+  </div>
+  <br>
+  <canvas id="canvas"></canvas>
+  
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>

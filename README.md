@@ -1,7 +1,7 @@
 # Hangman
 
-### Insert words into a list and check if a given word belongs to a list
+### Great game to learn English
 
-Please insert words to create a list. Introduce another word and check if belongs to the previously created list.
+Classic childhood game. Try to guess the word hidden under the boxes.
 
 *This project has a demo [here](https://vladmrn.github.io/hangman/).*

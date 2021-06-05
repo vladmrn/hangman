@@ -37,7 +37,7 @@ function drawFirstMistake() {
     ctx.lineWidth = 8;
     ctx.beginPath();
     ctx.moveTo(90, 365);
-    ctx.lineTo(90,45);
+    ctx.lineTo(90, 45);
     ctx.stroke();
 }
 
@@ -62,7 +62,7 @@ function drawThirdMistake() {
 function drawFourthMistake() {
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(177,137, 13, 0, 2*Math.PI);
+    ctx.arc(177, 137, 13, 0, 2 * Math.PI);
     ctx.moveTo(177, 150);
     ctx.lineTo(177, 250);
     ctx.lineTo(200, 300);
@@ -90,43 +90,46 @@ function checkLetters(inputLetter) {
         if (inputLetter === letter) {
             correctGuess = true;
             document.getElementById(index).textContent = inputLetter;
-            document.getElementById(letter).style.visibility='hidden';
+            document.getElementById(letter).style.visibility = 'hidden';
             audioCorrect.play();
             ++counterGuessedWords;
             if (counterGuessedWords === word.length) {
                 document.getElementById("guessTheWord").innerHTML = "Congratulations!!!";
-                $('.alphabet').attr('disabled','disabled');
+                $('.alphabet').attr('disabled', 'disabled');
                 audioVictory.play();
                 $("#refreshPage").css("visibility", "visible");
             }
-        } 
+        }
     });
     if (correctGuess === false) {
+        document.getElementById(inputLetter).style.visibility = 'hidden';
         audioError.play();
-        ++counterMistakes;
-        if (counterMistakes === 1) {
-            drawFirstMistake();
-        }
-        if (counterMistakes === 2) {
-            drawSecondMistake();
-        }
-        if (counterMistakes === 3) {
-            drawThirdMistake();
-        }
-        if (counterMistakes === 4) {
-            drawFourthMistake();
-            document.getElementById("guessTheWord").innerHTML = "Sorry, u dead.";
-            audioLoser.play();
-            $("#refreshPage").css("visibility", "visible");
-            $('.alphabet').attr('disabled','disabled');
+        if (inputLetter != "A" && inputLetter != "E" && inputLetter != "I" && inputLetter != "O" && inputLetter != "U") {
+            ++counterMistakes;
+            if (counterMistakes === 1) {
+                drawFirstMistake();
+            }
+            if (counterMistakes === 2) {
+                drawSecondMistake();
+            }
+            if (counterMistakes === 3) {
+                drawThirdMistake();
+            }
+            if (counterMistakes === 4) {
+                drawFourthMistake();
+                document.getElementById("guessTheWord").innerHTML = "Sorry, u dead.";
+                audioLoser.play();
+                $("#refreshPage").css("visibility", "visible");
+                $('.alphabet').attr('disabled', 'disabled');
+            }
         }
     }
 }
 
 function refreshPage() {
     window.location.reload();
-} 
-    
+}
+
 
 
 

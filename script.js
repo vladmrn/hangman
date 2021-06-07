@@ -1,11 +1,15 @@
 var word;
 
 function startGame() {
-    word = document.getElementById("inputWord").value.toUpperCase();
     $(".spacer").css("visibility", "hidden");
     $(".alphabet").css("visibility", "visible");
     $(".letterInputDiv").css("visibility", "visible");
     $("#canvas").css("visibility", "visible");
+    createLetterBox();
+}
+
+function createLetterBox() {
+    word = document.getElementById("inputWord").value.toUpperCase();
     word.split('').forEach(function addLetterBox(letter, i) {
         var new_button = document.createElement("button");
         const currentDiv = document.getElementById("letterInputDiv");

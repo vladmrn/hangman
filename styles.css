@@ -1,5 +1,4 @@
 body {
-  background-image: url(photo.jpeg);
   background-color: #e4e0d5;
   background-blend-mode: screen;
   background-repeat: no-repeat;
@@ -71,4 +70,3 @@ body {
   vertical-align: middle;
   float:right;
 }
-

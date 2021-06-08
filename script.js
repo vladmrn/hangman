@@ -1,5 +1,7 @@
 var word;
 
+
+
 function startGame() {
     $(".spacer").css("visibility", "hidden");
     $(".alphabet").css("visibility", "visible");
@@ -81,6 +83,12 @@ function drawFourthMistake() {
     ctx.stroke();
 }
 
+//Sound On.
+var mutePage = true;
+function unmutePage() {
+    mutePage = false;
+    document.getElementById("mute-btn").style.visibility = 'hidden';
+}
 
 // Check the letters.
 var counterGuessedWords = 0, counterMistakes = 0;
@@ -95,19 +103,25 @@ function checkLetters(inputLetter) {
             correctGuess = true;
             document.getElementById(index).textContent = inputLetter;
             document.getElementById(letter).style.visibility = 'hidden';
-            audioCorrect.play();
+            if (mutePage == false) {
+                audioCorrect.play();
+            }
             ++counterGuessedWords;
             if (counterGuessedWords === word.length) {
                 document.getElementById("guessTheWord").innerHTML = "Congratulations!!!";
                 $('.alphabet').attr('disabled', 'disabled');
-                audioVictory.play();
+                if (mutePage == false) {
+                    audioVictory.play();
+                }
                 $("#refreshPage").css("visibility", "visible");
             }
         }
     });
     if (correctGuess === false) {
         document.getElementById(inputLetter).style.visibility = 'hidden';
-        audioError.play();
+        if (mutePage == false) {
+            audioError.play();
+        }
         if (inputLetter != "A" && inputLetter != "E" && inputLetter != "I" && inputLetter != "O" && inputLetter != "U") {
             ++counterMistakes;
             if (counterMistakes === 1) {
@@ -122,7 +136,9 @@ function checkLetters(inputLetter) {
             if (counterMistakes === 4) {
                 drawFourthMistake();
                 document.getElementById("guessTheWord").innerHTML = "Sorry, u dead.";
-                audioLoser.play();
+                if (mutePage == false) {
+                    audioLoser.play();
+                }
                 $("#refreshPage").css("visibility", "visible");
                 $('.alphabet').attr('disabled', 'disabled');
             }

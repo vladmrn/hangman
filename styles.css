@@ -75,3 +75,13 @@ body {
   vertical-align: middle;
   float:left;
 }
+
+#wordToShort {
+  visibility: hidden;
+  vertical-align: middle;
+}
+
+#itSNotWord {
+  visibility: hidden;
+  vertical-align: middle;
+}

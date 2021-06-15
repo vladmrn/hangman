@@ -14,22 +14,32 @@ input.addEventListener("keyup", function(event) {
 });
 
 function startGame() {
-    $(".spacer").css("visibility", "hidden");
-    $(".alphabet").css("visibility", "visible");
-    $(".letterInputDiv").css("visibility", "visible");
-    $("#canvas").css("visibility", "visible");
-    createLetterBox();
+    if (input.value.length > 2) {
+        $(".spacer").css("visibility", "hidden");
+        $(".alphabet").css("visibility", "visible");
+        $(".letterInputDiv").css("visibility", "visible");
+        $("#canvas").css("visibility", "visible");
+        createLetterBox();
+    } else {
+        document.getElementById("wordToShort").style.visibility = "visible";
+        document.getElementById("inputWord").placeholder="Insert a word";//aici trebuie sa mai lucrez.
+    }
 }
 
 function createLetterBox() {
     word = document.getElementById("inputWord").value.toUpperCase();
-    word.split('').forEach(function addLetterBox(letter, i) {
-        var new_button = document.createElement("button");
-        const currentDiv = document.getElementById("letterInputDiv");
-        currentDiv.insertAdjacentElement("afterbegin", new_button);
-        new_button.className = "letterBox";
-        new_button.id = word.length - i - 1;
-    });
+    if (!/[^a-zA-Z]/.test(word)) {  //aici mai trebuie lucrat.
+        word.split('').forEach(function addLetterBox(letter, i) {
+            var new_button = document.createElement("button");
+            const currentDiv = document.getElementById("letterInputDiv");
+            currentDiv.insertAdjacentElement("afterbegin", new_button);
+            new_button.className = "letterBox";
+            new_button.id = word.length - i - 1;
+        });
+    } else {
+        document.getElementById("itSNotWord").style.visibility = "visible";
+    }
+    
 }
 
 let dpi = window.devicePixelRatio;

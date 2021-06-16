@@ -4,7 +4,6 @@ var input = document.getElementById("inputWord");
 
 // Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
   if (event.key === "Enter") {
     // Cancel the default action, if needed
     event.preventDefault();
@@ -14,11 +13,28 @@ input.addEventListener("keyup", function(event) {
 });
 
 function startGame() {
-    $(".spacer").css("visibility", "hidden");
-    $(".alphabet").css("visibility", "visible");
-    $(".letterInputDiv").css("visibility", "visible");
-    $("#canvas").css("visibility", "visible");
-    createLetterBox();
+    var isValid = true;
+    word = document.getElementById("inputWord").value.toUpperCase();
+    if (/[^a-zA-Z]/.test(word)) {
+        isValid = false;
+        document.getElementById("wordToShort").style.visibility = "hidden";
+        document.getElementById("itSNotWord").style.visibility = "visible";
+        document.getElementById("inputWord").value = '';
+    } else if (input.value.length < 3) {
+        isValid = false;
+        document.getElementById("itSNotWord").style.visibility = "hidden";
+        document.getElementById("wordToShort").style.visibility = "visible";
+        document.getElementById("inputWord").value = '';
+    }
+    if (isValid === true) {
+        $(".spacer").css("visibility", "hidden");
+        $(".alphabet").css("visibility", "visible");
+        $(".letterInputDiv").css("visibility", "visible");
+        $("#canvas").css("visibility", "visible");
+        document.getElementById("itSNotWord").style.visibility = "hidden";
+        document.getElementById("wordToShort").style.visibility = "hidden";
+        createLetterBox();
+    }
 }
 
 function createLetterBox() {

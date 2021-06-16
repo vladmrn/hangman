@@ -4,7 +4,6 @@ var input = document.getElementById("inputWord");
 
 // Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
   if (event.key === "Enter") {
     // Cancel the default action, if needed
     event.preventDefault();
@@ -14,32 +13,39 @@ input.addEventListener("keyup", function(event) {
 });
 
 function startGame() {
-    if (input.value.length > 2) {
+    var isValid = true;
+    word = document.getElementById("inputWord").value.toUpperCase();
+    if (/[^a-zA-Z]/.test(word)) {
+        isValid = false;
+        document.getElementById("wordToShort").style.visibility = "hidden";
+        document.getElementById("itSNotWord").style.visibility = "visible";
+        document.getElementById("inputWord").value = '';
+    } else if (input.value.length < 3) {
+        isValid = false;
+        document.getElementById("itSNotWord").style.visibility = "hidden";
+        document.getElementById("wordToShort").style.visibility = "visible";
+        document.getElementById("inputWord").value = '';
+    }
+    if (isValid === true) {
         $(".spacer").css("visibility", "hidden");
         $(".alphabet").css("visibility", "visible");
         $(".letterInputDiv").css("visibility", "visible");
         $("#canvas").css("visibility", "visible");
+        document.getElementById("itSNotWord").style.visibility = "hidden";
+        document.getElementById("wordToShort").style.visibility = "hidden";
         createLetterBox();
-    } else {
-        document.getElementById("wordToShort").style.visibility = "visible";
-        document.getElementById("inputWord").placeholder="Insert a word";//aici trebuie sa mai lucrez.
     }
 }
 
 function createLetterBox() {
     word = document.getElementById("inputWord").value.toUpperCase();
-    if (!/[^a-zA-Z]/.test(word)) {  //aici mai trebuie lucrat.
-        word.split('').forEach(function addLetterBox(letter, i) {
-            var new_button = document.createElement("button");
-            const currentDiv = document.getElementById("letterInputDiv");
-            currentDiv.insertAdjacentElement("afterbegin", new_button);
-            new_button.className = "letterBox";
-            new_button.id = word.length - i - 1;
-        });
-    } else {
-        document.getElementById("itSNotWord").style.visibility = "visible";
-    }
-    
+    word.split('').forEach(function addLetterBox(letter, i) {
+        var new_button = document.createElement("button");
+        const currentDiv = document.getElementById("letterInputDiv");
+        currentDiv.insertAdjacentElement("afterbegin", new_button);
+        new_button.className = "letterBox";
+        new_button.id = word.length - i - 1;
+    });
 }
 
 let dpi = window.devicePixelRatio;

@@ -79,9 +79,15 @@ body {
 #wordToShort {
   visibility: hidden;
   vertical-align: middle;
+  position: absolute; 
+  top:0; 
+  left: 150px;;
 }
 
 #itSNotWord {
   visibility: hidden;
   vertical-align: middle;
+  position: absolute; 
+  top: 0; 
+  left: 150px;
 }
